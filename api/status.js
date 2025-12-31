@@ -1,8 +1,11 @@
-let currentStatus = "0";
-
 export default function handler(req, res) {
-  if (req.query.value) {
-    currentStatus = req.query.value;
+  if (!global.status) {
+    global.status = "0";
   }
-  res.json({ status: currentStatus });
+
+  if (req.query.value !== undefined) {
+    global.status = req.query.value;
+  }
+
+  res.status(200).json({ status: global.status });
 }
